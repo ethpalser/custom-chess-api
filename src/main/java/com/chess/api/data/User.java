@@ -1,5 +1,6 @@
 package com.chess.api.data;
 
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -18,5 +19,11 @@ public class User {
     private String username;
 
     private String password;
+
+    // A generated token for auth, so login is not necessary for future requests
+    private String token;
+
+    // A time period that this token expires
+    private LocalDateTime tokenExpire;
 
 }
