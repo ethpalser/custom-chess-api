@@ -21,8 +21,8 @@ public class Piece {
     public PieceType type;
 
     // A point in the format of 'char''num' (ex. a0)
-    public String location;
+    public Point location;
 
     // A list of points in the format of 'char''num' (ex. e4). Configuring movements by client currently not supported.
-    public List<String> movements;
+    public List<Point> movements;
 }
