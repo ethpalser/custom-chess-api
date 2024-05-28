@@ -1,17 +1,14 @@
 package com.chess.api.data;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.Data;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@NonNull
+@Data
 @Document("user")
 public class User {
 
@@ -27,5 +24,21 @@ public class User {
 
     // A time period that this token expires
     private LocalDateTime tokenExpire;
+
+    public User() {
+        this.id = new ObjectId();
+        this.username = "Test";
+        this.password = "Test";
+        this.token = null;
+        this.tokenExpire = null;
+    }
+
+    public User(String username, String password) {
+        this.id = new ObjectId();
+        this.username = username;
+        this.password = password;
+        this.token = null;
+        this.tokenExpire = null;
+    }
 
 }
