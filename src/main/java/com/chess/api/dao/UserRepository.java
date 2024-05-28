@@ -7,10 +7,10 @@ import org.springframework.data.mongodb.repository.Query;
 
 public interface UserRepository extends MongoRepository<User, Long> {
 
-    @Query("{_id:$eq{'?0'}}")
+    @Query("{_id:'?0'}")
     User findUserById(ObjectId id);
 
-    @Query("{token:$eq{'?0'}}")
+    @Query("{token:'?0'}")
     User findUserByToken(String token);
 
 
