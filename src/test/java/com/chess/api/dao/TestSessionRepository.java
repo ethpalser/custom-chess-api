@@ -16,7 +16,7 @@ class TestSessionRepository {
     @Autowired
     private SessionRepository sessionRepository;
 
-    private static ObjectId testSessionId;
+    private ObjectId testSessionId;
 
     Session testSession() {
         ObjectId white = new ObjectId();
