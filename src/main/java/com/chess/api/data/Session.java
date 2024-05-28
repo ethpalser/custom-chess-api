@@ -1,5 +1,6 @@
 package com.chess.api.data;
 
+import com.chess.api.data.piece.Action;
 import com.chess.api.data.piece.Piece;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -17,12 +18,18 @@ public class Session {
     @Id
     private long id;
 
-    private long whiteUserId;
+    // Not using @DBRef as user ids are only needed for authorization
+    private long userWhiteId;
 
-    private long blackUserId;
+    private long userBlackId;
+
+    // Nullable
+    private Long userWinnerId;
+
+    private boolean inProgress;
 
     // List of (custom) chess notation action strings (i.e. Piece & Location to Piece & Location)
-    private List<String> log;
+    private List<Action> moves;
 
     // List of Pieces on board and where they can move. Game will provide where they can move.
     private List<Piece> pieces;
