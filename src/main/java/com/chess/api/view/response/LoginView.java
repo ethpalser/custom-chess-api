@@ -3,8 +3,8 @@ package com.chess.api.view.response;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class PlayerView {
+public class LoginView {
 
-    private final String username;
-
+    private final String jwt;
+    private final String refreshToken;
 }
