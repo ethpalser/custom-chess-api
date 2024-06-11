@@ -1,7 +1,11 @@
 package com.chess.api.controller;
 
+import com.chess.api.view.request.SessionCreateRequest;
+import com.chess.api.view.request.SessionUpdateRequest;
 import com.chess.api.view.response.SessionView;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +19,7 @@ public class SessionController {
     }
 
     @PutMapping("/sessions/")
-    public SessionView handleCreateSession(){
+    public SessionView handleCreateSession(SessionCreateRequest request) {
         return null;
     }
 
@@ -27,8 +31,18 @@ public class SessionController {
      * @return Information of a session: Players, Board, and history of actions.
      */
     @PostMapping("/sessions/")
-    public SessionView handleUpdateSession() {
+    public SessionView handleUpdateSession(SessionUpdateRequest request) {
         return null;
+    }
+
+    @GetMapping("/sessions/{id}")
+    public SessionView handleFetchSession(@PathVariable String id) {
+        return null;
+    }
+
+    @DeleteMapping("/sessions/{id}")
+    public void handleSoftDeleteSession(@PathVariable String id) {
+        // empty
     }
 
 }

@@ -1,6 +1,5 @@
 package com.chess.api.controller;
 
-import com.chess.api.data.User;
 import com.chess.api.view.request.UserCreateRequest;
 import com.chess.api.view.request.UserLoginRequest;
 import com.chess.api.view.request.UserUpdateRequest;
