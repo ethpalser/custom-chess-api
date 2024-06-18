@@ -5,6 +5,8 @@ import com.chess.api.data.Session;
 import com.chess.api.data.SessionStatus;
 import com.chess.api.view.request.SessionCreateRequest;
 import com.chess.api.view.request.SessionUpdateRequest;
+import java.awt.print.Pageable;
+import java.util.Date;
 import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,9 @@ public class SessionService {
         this.sessionRepository = sessionRepository;
     }
 
-    public List<Session> getAllSessionsByUser(String username) {
-        return this.sessionRepository.findAllByPlayerName(username, username);
+    public List<Session> getAllSessions(String username, int page, int pageSize) {
+
+        return this.sessionRepository.findAllByPlayerName(username, username, page, pageSize);
     }
 
     public Session createSession(SessionCreateRequest request) {
@@ -45,6 +48,7 @@ public class SessionService {
             return;
         }
         session.setStatus(SessionStatus.DELETED);
+        session.setUpdatedAt(new Date());
         this.sessionRepository.save(session);
     }
 

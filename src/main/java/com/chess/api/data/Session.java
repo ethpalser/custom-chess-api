@@ -2,6 +2,7 @@ package com.chess.api.data;
 
 import com.chess.api.data.piece.Action;
 import com.chess.api.data.piece.Piece;
+import java.util.Date;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,10 @@ public class Session {
 
     @Id
     private ObjectId id;
+
+    private Date createdAt;
+
+    private Date updatedAt;
 
     private String usernameWhite;
 
@@ -41,6 +46,8 @@ public class Session {
 
     public Session() {
         this.id = new ObjectId();
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
         this.usernameWhite = null;
         this.usernameBlack = null;
         this.usernameWinner = null;
@@ -51,6 +58,8 @@ public class Session {
 
     public Session(String usernameWhite, String usernameBlack, List<Piece> pieces) {
         this.id = new ObjectId();
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
         this.usernameWhite = usernameWhite;
         this.usernameBlack = usernameBlack;
         this.usernameWinner = null;

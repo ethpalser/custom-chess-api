@@ -1,5 +1,6 @@
 package com.chess.api.controller;
 
+import com.chess.api.data.SessionStatus;
 import com.chess.api.view.request.SessionCreateRequest;
 import com.chess.api.view.request.SessionUpdateRequest;
 import com.chess.api.view.response.SessionView;
@@ -8,13 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class SessionController {
 
     @GetMapping("/sessions/")
-    public SessionView handleGetSession() {
+    public SessionView handleGetSessions(
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String username
+    ) {
         return null;
     }
 
