@@ -2,6 +2,8 @@ package com.chess.api.data;
 
 import com.chess.api.data.piece.Action;
 import com.chess.api.data.piece.Piece;
+import com.chess.api.view.response.PlayerView;
+import com.chess.api.view.response.SessionView;
 import java.util.Date;
 import java.util.List;
 import lombok.AccessLevel;
@@ -66,6 +68,14 @@ public class Session {
         this.status = SessionStatus.PENDING.getValue();
         this.moves = List.of();
         this.pieces = pieces;
+    }
+
+    public static SessionView toView(Session session) {
+        PlayerView white = new PlayerView(session.usernameWhite);
+        PlayerView black = new PlayerView(session.usernameBlack);
+        PlayerView winner = new PlayerView(session.usernameWinner);
+        // Todo: Get Board from session details using Chess package
+        return new SessionView(white, black, session.getMoves(), null, winner);
     }
 
     public SessionStatus getStatus() {

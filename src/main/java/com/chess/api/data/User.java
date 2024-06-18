@@ -1,5 +1,6 @@
 package com.chess.api.data;
 
+import com.chess.api.view.response.PlayerView;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,6 +40,10 @@ public class User {
         this.password = password;
         this.token = null;
         this.tokenExpire = null;
+    }
+
+    public static PlayerView toView(User user) {
+        return new PlayerView(user.getUsername());
     }
 
 }
