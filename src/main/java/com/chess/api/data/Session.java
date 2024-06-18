@@ -3,8 +3,11 @@ package com.chess.api.data;
 import com.chess.api.data.piece.Action;
 import com.chess.api.data.piece.Piece;
 import java.util.List;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,15 +20,18 @@ public class Session {
     @Id
     private ObjectId id;
 
-    // Not using @DBRef as user ids are only needed for authorization
-    private ObjectId userWhiteId;
+    private String usernameWhite;
 
-    private ObjectId userBlackId;
+    private String usernameBlack;
 
     // Nullable
-    private ObjectId userWinnerId;
+    @Setter(AccessLevel.NONE)
+    private String usernameWinner;
 
-    private boolean inProgress;
+    // MongoDB does not support Enums, so a string will be used with custom a getter & setter
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
+    private String status;
 
     // List of (custom) chess notation action strings (i.e. Piece & Location to Piece & Location)
     private List<Action> moves;
@@ -35,12 +41,43 @@ public class Session {
 
     public Session() {
         this.id = new ObjectId();
-        this.userWhiteId = null;
-        this.userBlackId = null;
-        this.userWinnerId = null;
-        this.inProgress = false;
+        this.usernameWhite = null;
+        this.usernameBlack = null;
+        this.usernameWinner = null;
+        this.status = SessionStatus.PENDING.getValue();
         this.moves = List.of();
         this.pieces = List.of();
+    }
+
+    public Session(String usernameWhite, String usernameBlack, List<Piece> pieces) {
+        this.id = new ObjectId();
+        this.usernameWhite = usernameWhite;
+        this.usernameBlack = usernameBlack;
+        this.usernameWinner = null;
+        this.status = SessionStatus.PENDING.getValue();
+        this.moves = List.of();
+        this.pieces = pieces;
+    }
+
+    public SessionStatus getStatus() {
+        SessionStatus ss = null;
+        try {
+            ss = SessionStatus.valueOf(this.status);
+        } catch (IllegalArgumentException ex) {
+            ss = SessionStatus.COMPLETED;
+        }
+        return ss;
+    }
+
+    public void setStatus(SessionStatus status) {
+        this.status = status.getValue();
+    }
+
+    public void setWinner(String username) {
+        if (!username.equals(this.usernameWhite) && !username.equals(this.usernameBlack)) {
+            throw new IllegalArgumentException("Illegal Argument: username does not match a player's username");
+        }
+        this.usernameWinner = username;
     }
 
 }

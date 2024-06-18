@@ -1,6 +1,7 @@
 package com.chess.api.dao;
 
 import com.chess.api.data.Session;
+import com.chess.api.data.SessionStatus;
 import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,12 +20,12 @@ class TestSessionRepository {
     private ObjectId testSessionId;
 
     Session testSession() {
-        ObjectId white = new ObjectId();
-        ObjectId black = new ObjectId();
+        String white = "white";
+        String black = "black";
         Session session = new Session();
         session.setId(this.testSessionId);
-        session.setUserWhiteId(white);
-        session.setUserBlackId(black);
+        session.setUsernameBlack(white);
+        session.setUsernameWhite(black);
         return session;
     }
 
@@ -49,7 +50,7 @@ class TestSessionRepository {
         if (fetched == null) {
             fetched = this.sessionRepository.save(testSession());
         }
-        fetched.setInProgress(true);
+        fetched.setStatus(SessionStatus.STARTED);
         sessionRepository.save(fetched);
         Assertions.assertEquals(fetched, this.sessionRepository.findSessionById(fetched.getId()));
     }

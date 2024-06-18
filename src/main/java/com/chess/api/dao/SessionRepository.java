@@ -11,7 +11,7 @@ public interface SessionRepository extends MongoRepository<Session, Long> {
     @Query("{_id:'?0'}")
     Session findSessionById(ObjectId id);
 
-    @Query("{inProgress:'?0'}")
-    List<Session> findAllByInProgress(boolean inProgress);
+    @Query("{$or: [{usernameWhite:{'?0'}}, {usernameBlack:{'?1'}}], status:{$ne:'Deleted'} }")
+    List<Session> findAllByPlayerName(String usernameWhite, String usernameBlack);
 
 }
