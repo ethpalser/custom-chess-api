@@ -1,5 +1,6 @@
 package com.chess.api.view.response;
 
+import com.chess.api.data.piece.Point;
 import java.util.Set;
 import lombok.AllArgsConstructor;
 
@@ -8,6 +9,6 @@ public class PieceView {
 
     private final String code;
     private final String colour;
-    private final Set<PointView> allowedMoves;
+    private final Set<Point> allowedMoves;
 
 }

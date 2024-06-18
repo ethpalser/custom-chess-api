@@ -5,6 +5,8 @@ import com.chess.api.data.User;
 import com.chess.api.view.request.UserCreateRequest;
 import com.chess.api.view.request.UserLoginRequest;
 import com.chess.api.view.request.UserUpdateRequest;
+import com.chess.api.view.response.LoginView;
+import com.chess.api.view.response.PlayerView;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +25,7 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public User login(UserLoginRequest request) {
+    public LoginView login(UserLoginRequest request) {
         // Todo
         return null;
     }
@@ -37,7 +39,7 @@ public class UserService {
         return this.userRepository.findUserByUsername(username);
     }
 
-    public User updateUser(UserUpdateRequest request, String originalUsername) {
+    public User updateUser(String originalUsername, UserUpdateRequest request) {
         User user = getUser(originalUsername);
         user.setUsername(request.getNewUsername());
         return this.userRepository.save(user);
