@@ -20,13 +20,13 @@ public class UserController {
         return List.of();
     }
 
-    @PutMapping("/users/")
-    public PlayerView handleCreateUser(UserCreateRequest request) {
+    @PostMapping("/users/")
+    public LoginView handleLogin(UserLoginRequest request) {
         return null;
     }
 
-    @PostMapping("/users/")
-    public LoginView handleLogin(UserLoginRequest request) {
+    @PutMapping("/users/")
+    public PlayerView handleCreateUser(UserCreateRequest request) {
         return null;
     }
 

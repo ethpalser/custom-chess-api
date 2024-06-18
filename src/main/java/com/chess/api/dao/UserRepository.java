@@ -10,6 +10,9 @@ public interface UserRepository extends MongoRepository<User, Long> {
     @Query("{_id:$eq{'?0'}}")
     User findUserById(ObjectId id);
 
+    @Query("{username:$eq{'?0'}}")
+    User findUserByUsername(String username);
+
     @Query("{token:$eq{'?0'}}")
     User findUserByToken(String token);
 
