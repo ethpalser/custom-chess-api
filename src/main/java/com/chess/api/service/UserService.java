@@ -33,12 +33,12 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
-    public User getUserByUsername(String username) {
+    public User getUser(String username) {
         return this.userRepository.findUserByUsername(username);
     }
 
     public User updateUser(UserUpdateRequest request, String originalUsername) {
-        User user = getUserByUsername(originalUsername);
+        User user = getUser(originalUsername);
         user.setUsername(request.getNewUsername());
         return this.userRepository.save(user);
     }
