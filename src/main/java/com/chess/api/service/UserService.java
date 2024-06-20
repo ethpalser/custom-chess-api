@@ -6,7 +6,6 @@ import com.chess.api.view.request.UserCreateRequest;
 import com.chess.api.view.request.UserLoginRequest;
 import com.chess.api.view.request.UserUpdateRequest;
 import com.chess.api.view.response.LoginView;
-import com.chess.api.view.response.PlayerView;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ public class UserService {
     }
 
     public LoginView login(UserLoginRequest request) {
-        // Todo
+        // Todo: 1. Check refresh token with database, 2. Check login credentials
         return null;
     }
 
