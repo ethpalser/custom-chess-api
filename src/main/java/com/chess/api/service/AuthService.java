@@ -2,6 +2,7 @@ package com.chess.api.service;
 
 import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.algorithms.Algorithm;
+import java.nio.charset.StandardCharsets;
 import java.security.spec.RSAPublicKeySpec;
 import java.util.Date;
 import java.util.Map;
@@ -52,6 +53,14 @@ public class AuthService {
              tokenBuilder.withClaim(c.getKey(), c.getValue());
          }
          return tokenBuilder.sign(alg);
+    }
+
+    public String createRefreshToken() {
+        byte[] bytes = new byte[32];
+        for (int i = 0; i < bytes.length; i++) {
+            bytes[i] = (byte)Math.floor(Math.random() * 128);
+        }
+        return new String(bytes, StandardCharsets.UTF_8);
     }
 
 }
