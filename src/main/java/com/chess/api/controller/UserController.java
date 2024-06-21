@@ -1,5 +1,6 @@
 package com.chess.api.controller;
 
+import com.chess.api.core.exception.UnauthorizedAccessException;
 import com.chess.api.data.User;
 import com.chess.api.service.UserService;
 import com.chess.api.view.request.UserCreateRequest;
@@ -32,7 +33,7 @@ public class UserController {
     }
 
     @PostMapping("/users/")
-    public LoginView handleLogin(UserLoginRequest request) {
+    public LoginView handleLogin(UserLoginRequest request) throws UnauthorizedAccessException {
         return this.userService.login(request);
     }
 
