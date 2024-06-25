@@ -26,6 +26,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PostMapping("/login")
+    public LoginView handleLogin(UserLoginRequest request) throws UnauthorizedAccessException {
+        return this.userService.login(request);
+    }
+
     @GetMapping("/users/")
     public List<PlayerView> handleFetchAllUsers() {
         List<User> users = this.userService.fetchAllUsers();
@@ -33,11 +38,6 @@ public class UserController {
     }
 
     @PostMapping("/users/")
-    public LoginView handleLogin(UserLoginRequest request) throws UnauthorizedAccessException {
-        return this.userService.login(request);
-    }
-
-    @PutMapping("/users/")
     public PlayerView handleCreateUser(UserCreateRequest request) {
         return User.toView(this.userService.createUser(request));
     }
@@ -47,7 +47,7 @@ public class UserController {
         return User.toView(this.userService.getUser(username));
     }
 
-    @PostMapping("/users/{username}")
+    @PutMapping("/users/{username}")
     public PlayerView handleUpdateUser(@PathVariable String username, UserUpdateRequest request) {
         return User.toView(this.userService.updateUser(username, request));
     }

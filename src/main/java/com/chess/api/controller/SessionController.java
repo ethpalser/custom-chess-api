@@ -36,7 +36,7 @@ public class SessionController {
         return list.stream().map(Session::toView).toList();
     }
 
-    @PutMapping("/sessions/")
+    @PostMapping("/sessions/")
     public SessionView handleCreateSession(SessionCreateRequest request) {
         return Session.toView(this.sessionService.createSession(request));
     }
@@ -48,7 +48,7 @@ public class SessionController {
      *
      * @return Information of a session: Players, Board, and history of actions.
      */
-    @PostMapping("/sessions/")
+    @PutMapping("/sessions/")
     public SessionView handleUpdateSession(SessionUpdateRequest request) {
         return Session.toView(this.sessionService.updateSession(request));
     }
