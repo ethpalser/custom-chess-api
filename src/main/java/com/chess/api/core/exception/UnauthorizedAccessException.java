@@ -2,17 +2,19 @@ package com.chess.api.core.exception;
 
 import lombok.Getter;
 
-public class UnauthorizedAccessException extends IllegalAccessException {
+@Getter
+public class UnauthorizedAccessException extends Exception implements ErrorCode {
 
-    @Getter
     private final String message;
+    private final String errorCode;
 
     public UnauthorizedAccessException() {
-        this.message = "unauthorized access";
+        this("unauthorized access", "BAD-AUTH");
     }
 
-    public UnauthorizedAccessException(String message) {
+    public UnauthorizedAccessException(String message, String errorCode) {
         this.message = message;
+        this.errorCode = errorCode;
     }
 
 }
