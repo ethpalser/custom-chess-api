@@ -1,7 +1,6 @@
 package com.chess.api.controller;
 
 import com.chess.api.data.Session;
-import com.chess.api.data.SessionStatus;
 import com.chess.api.service.SessionService;
 import com.chess.api.view.request.SessionCreateRequest;
 import com.chess.api.view.request.SessionUpdateRequest;
@@ -13,10 +12,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/sessions")
 public class SessionController {
 
     private final SessionService sessionService;
@@ -26,7 +27,7 @@ public class SessionController {
         this.sessionService = sessionService;
     }
 
-    @GetMapping("/sessions/")
+    @GetMapping
     public List<SessionView> handleGetSessions(
             @RequestParam int page,
             @RequestParam int size,
@@ -36,7 +37,7 @@ public class SessionController {
         return list.stream().map(Session::toView).toList();
     }
 
-    @PostMapping("/sessions/")
+    @PostMapping
     public SessionView handleCreateSession(SessionCreateRequest request) {
         return Session.toView(this.sessionService.createSession(request));
     }
@@ -48,17 +49,17 @@ public class SessionController {
      *
      * @return Information of a session: Players, Board, and history of actions.
      */
-    @PutMapping("/sessions/")
+    @PutMapping
     public SessionView handleUpdateSession(SessionUpdateRequest request) {
         return Session.toView(this.sessionService.updateSession(request));
     }
 
-    @GetMapping("/sessions/{id}")
+    @GetMapping("/{id}")
     public SessionView handleFetchSession(@PathVariable String id) {
         return Session.toView(this.sessionService.getSession(id));
     }
 
-    @DeleteMapping("/sessions/{id}")
+    @DeleteMapping("/{id}")
     public void handleSoftDeleteSession(@PathVariable String id) {
         this.sessionService.deleteSession(id);
     }

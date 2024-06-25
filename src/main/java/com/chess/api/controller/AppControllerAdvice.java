@@ -1,7 +1,7 @@
-package com.chess.api;
+package com.chess.api.controller;
 
 import com.chess.api.core.exception.UnauthorizedAccessException;
-import com.chess.api.view.response.ErrorView;
+import com.chess.api.core.exception.ErrorView;
 import jakarta.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class ApiControllerAdvice {
+public class AppControllerAdvice {
 
     @Value("${api.version}")
     private String apiVersion;

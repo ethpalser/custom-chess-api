@@ -1,10 +1,12 @@
-package com.chess.api.view.response;
+package com.chess.api.core.exception;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class ErrorView {
 
     private String apiVersion;
@@ -20,7 +22,7 @@ public class ErrorView {
                 defaultErrorAttributes.get("status").toString(),
                 "SERVER-ERR",
                 (String) defaultErrorAttributes.getOrDefault("message", "no message available"),
-                (String) defaultErrorAttributes.getOrDefault("error", "no"),
+                (String) defaultErrorAttributes.getOrDefault("error", "no error available"),
                 (String) defaultErrorAttributes.getOrDefault("timestamp", LocalDateTime.now().toString())
         );
     }

@@ -1,16 +1,15 @@
-package com.chess.api;
+package com.chess.api.core.exception;
 
-import com.chess.api.view.response.ErrorView;
 import java.util.Map;
 import org.springframework.boot.web.error.ErrorAttributeOptions;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.web.context.request.WebRequest;
 
-public class ApiErrorAttributes extends DefaultErrorAttributes {
+public class AppErrorAttributes extends DefaultErrorAttributes {
 
     private final String currentApiVersion;
 
-    public ApiErrorAttributes(String currentApiVersion) {
+    public AppErrorAttributes(String currentApiVersion) {
         this.currentApiVersion = currentApiVersion;
     }
 

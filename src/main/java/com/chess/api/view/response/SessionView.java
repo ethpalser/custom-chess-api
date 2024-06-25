@@ -5,8 +5,10 @@ import com.chess.api.data.piece.Point;
 import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class SessionView {
 
     private final PlayerView playerWhite;
