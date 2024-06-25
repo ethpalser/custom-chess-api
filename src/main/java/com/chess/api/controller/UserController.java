@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -31,23 +33,23 @@ public class UserController {
         return this.userService.login(request);
     }
 
-    @GetMapping("/users/")
+    @GetMapping
     public List<PlayerView> handleFetchAllUsers() {
         List<User> users = this.userService.fetchAllUsers();
         return users.stream().map(User::toView).toList();
     }
 
-    @PostMapping("/users/")
+    @PostMapping
     public PlayerView handleCreateUser(UserCreateRequest request) {
         return User.toView(this.userService.createUser(request));
     }
 
-    @GetMapping("/users/{username}")
+    @GetMapping("/{username}")
     public PlayerView handleFetchUser(@PathVariable String username) {
         return User.toView(this.userService.getUser(username));
     }
 
-    @PutMapping("/users/{username}")
+    @PutMapping("/{username}")
     public PlayerView handleUpdateUser(@PathVariable String username, UserUpdateRequest request) {
         return User.toView(this.userService.updateUser(username, request));
     }
