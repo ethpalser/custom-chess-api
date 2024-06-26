@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-public interface SessionRepository extends MongoRepository<Session, Long> {
+public interface SessionRepository extends MongoRepository<Session, String> {
 
     @Query("{_id:'?0'}")
     Session findSessionById(ObjectId id);

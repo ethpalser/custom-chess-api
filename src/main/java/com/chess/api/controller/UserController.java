@@ -1,12 +1,9 @@
 package com.chess.api.controller;
 
-import com.chess.api.core.exception.UnauthorizedAccessException;
 import com.chess.api.data.User;
 import com.chess.api.service.UserService;
 import com.chess.api.view.request.UserCreateRequest;
-import com.chess.api.view.request.UserLoginRequest;
 import com.chess.api.view.request.UserUpdateRequest;
-import com.chess.api.view.response.LoginView;
 import com.chess.api.view.response.PlayerView;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +23,6 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
-    }
-
-    @PostMapping("/login")
-    public LoginView handleLogin(UserLoginRequest request) throws UnauthorizedAccessException {
-        return this.userService.login(request);
     }
 
     @GetMapping
