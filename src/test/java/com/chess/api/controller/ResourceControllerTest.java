@@ -19,20 +19,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.test.context.support.TestExecutionEvent;
 import org.springframework.security.test.context.support.WithAnonymousUser;
 import org.springframework.security.test.context.support.WithUserDetails;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureCache
-@AutoConfigureDataMongo
-@AutoConfigureMockMvc
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@AutoConfigureDataMongo
 class ResourceControllerTest {
 
     @Autowired
+    private WebApplicationContext context;
     private MockMvc mockMvc;
 
     // Including UserRepository to set up database before running user tests
@@ -44,6 +46,12 @@ class ResourceControllerTest {
 
     @BeforeAll
     void setup() {
+        // Setup MockMvc
+        this.mockMvc = MockMvcBuilders
+                .webAppContextSetup(this.context)
+                .apply(springSecurity())
+                .build();
+
         this.testUserIds = new ArrayList<>();
         // Test Users
         User basicUser = new User("test-user", "test-password");
