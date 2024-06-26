@@ -1,4 +1,4 @@
-package com.chess.api.core.security;
+package com.chess.api.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
