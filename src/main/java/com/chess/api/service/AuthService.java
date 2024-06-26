@@ -6,6 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.chess.api.core.utils.KeyValuePair;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -63,4 +64,7 @@ public class AuthService {
         return new String(bytes, StandardCharsets.UTF_8);
     }
 
+    private String hashString(String message) {
+        return DigestUtils.sha256Hex(message);
+    }
 }
