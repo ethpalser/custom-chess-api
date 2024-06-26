@@ -2,6 +2,7 @@ package com.chess.api.dao;
 
 import com.chess.api.data.User;
 import org.bson.types.ObjectId;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -27,8 +28,11 @@ class TestUserRepository {
     @BeforeAll()
     void beforeAll() {
         this.testUserId = new ObjectId();
-        // Only for DEV environment; todo: update to only be for DEV
-        this.userRepository.deleteAll();
+    }
+
+    @AfterAll
+    void teardown() {
+        this.userRepository.deleteById(this.testUserId.toString());
     }
 
     @Test

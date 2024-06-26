@@ -3,6 +3,7 @@ package com.chess.api.dao;
 import com.chess.api.data.Session;
 import com.chess.api.data.SessionStatus;
 import org.bson.types.ObjectId;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,10 +31,13 @@ class TestSessionRepository {
     }
 
     @BeforeAll()
-    void beforeAll() {
+    void setup() {
         this.testSessionId = new ObjectId();
-        // Only for DEV environment; todo: update to only be for DEV
-        this.sessionRepository.deleteAll();
+    }
+
+    @AfterAll()
+    void teardown() {
+        this.sessionRepository.deleteById(this.testSessionId.toString());
     }
 
     @Test
